@@ -452,12 +452,6 @@
         if (!c) setTimeout(() => pop.querySelector('input[type=email]').focus({ preventScroll: true }), 450);
       });
       if (matchMedia('(max-width: 1100px)').matches) { pop.classList.add('closed'); head.setAttribute('aria-expanded', 'false'); }
-      // переход из письма Kit после подтверждения подписки
-      if (new URLSearchParams(location.search).has('confirmed')) {
-        pop.classList.remove('closed'); head.setAttribute('aria-expanded', 'true');
-        const n = document.getElementById('note'); n.textContent = 'Подписка подтверждена. Спасибо!'; n.className = 'note ok';
-        history.replaceState(null, '', location.pathname);
-      }
       requestAnimationFrame(() => wrap.classList.add('in'));
     })();
   </script>
@@ -503,7 +497,7 @@
         }
         if (data.status && data.status !== 'success') throw new Error(data.status);
         form.reset(); form.classList.remove('ready');
-        say('Почти готово! Проверьте почту и подтвердите подписку.', 'ok');
+        say('Готово! Напишем, как только выйдет выпуск.', 'ok');
       } catch {
         say('Не получилось отправить. Попробуйте ещё раз чуть позже.', 'err');
       } finally {
