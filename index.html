@@ -434,10 +434,8 @@
     <button type="button" class="pop-head" aria-expanded="true" aria-controls="popbody"><span>Подписка</span><span class="pop-ic" aria-hidden="true"></span></button>
     <div class="pop-body" id="popbody"><div class="pop-inner"><div class="pop-pad">
       <p class="lead">Сообщим, как только выйдет первый выпуск</p>
-      <!-- Netlify Forms: адреса видны в панели Netlify → Forms → subscribe (можно выгрузить CSV и импортировать в Kit) -->
-      <form id="signup" name="subscribe" action="/" method="post" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-      <input type="hidden" name="form-name" value="subscribe">
-      <p hidden><label>Не заполняйте: <input name="bot-field"></label></p>
+      <!-- Kit: форма «Pine form» (ID 10122054), подписчики видны в Kit → Subscribers -->
+      <form id="signup" action="https://app.kit.com/forms/10122054/subscriptions" method="post" novalidate>
       <input type="email" name="email_address" placeholder="ваш email" autocomplete="email" required aria-label="Ваш email">
       <button type="submit" tabindex="-1" aria-label="Хочу прочитать" title="Хочу прочитать">→</button>
     </form>
@@ -486,12 +484,20 @@
       try {
         const res = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(form)).toString(),
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form),
         });
         if (!res.ok) throw new Error(res.status);
+        const data = await res.json().catch(() => ({}));
+        if (data.status === 'quarantined' && data.url) {
+          // Kit просит пройти короткую проверку «я не робот» на своей странице
+          say('Ещё один шаг: подтвердите подписку на странице Kit.', 'ok');
+          window.location.href = data.url;
+          return;
+        }
+        if (data.status && data.status !== 'success') throw new Error(data.status);
         form.reset(); form.classList.remove('ready');
-        say('Готово! Напишем, как только выйдет выпуск.', 'ok');
+        say('Почти готово! Проверьте почту и подтвердите подписку.', 'ok');
       } catch {
         say('Не получилось отправить. Попробуйте ещё раз чуть позже.', 'err');
       } finally {
