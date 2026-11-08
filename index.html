@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tropa — журнал о тех, кто уехал</title>
+  <meta name="description" content="Tropa — периодическое интернет-издание о тех, кто уехал. Интервью с дизайнерами, художниками и другими людьми творческих профессий, которые уехали из России. Каждый выпуск объединяет несколько разговоров одной темой.">
+  <meta property="og:title" content="Tropa — журнал о тех, кто уехал">
+  <meta property="og:description" content="Tropa — периодическое интернет-издание о тех, кто уехал. Интервью с дизайнерами, художниками и другими людьми творческих профессий, которые уехали из России. Каждый выпуск объединяет несколько разговоров одной темой.">
+  <meta property="og:url" content="https://tropa.media/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://tropa.media/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tropa: Issue 01 — Российская культура дизайна: input/output">
+  <meta property="og:site_name" content="Tropa">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://tropa.media/og.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --ink: #f2f0eb;
+      --muted: #8e8c88;
+      --field: #1a1a1a;
+      --cover: #fbfaf6;   /* тёплая мелованная бумага */
+      --cover-ink: #171717;
+      --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --gutter: clamp(16px, 4vw, 48px);
+      --logo-h: calc((100vw - 2 * var(--gutter)) * 123 / 777); /* высота слова tropa */
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      height: 100svh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* ---------- шапка ---------- */
+    .masthead { flex: none; padding: clamp(8px, 1vw, 16px) var(--gutter) 0; }
+    .masthead-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: clamp(11px, 1vw, 16px);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+    .masthead-meta p { margin: 0; }
+    .masthead-meta .indent { display: block; padding-left: 2.6em; }
+    .masthead h1 { margin: 0; }
+    .masthead .logo { display: block; width: 100%; height: auto; margin-top: clamp(2px, .3vw, 6px); fill: var(--ink); }
+
+    main {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      z-index: 1;
+      margin-top: calc(var(--logo-h) * -.55); /* журнал наезжает на tropa */
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: clamp(32px, 5vw, 72px);
+      padding: 0 var(--gutter) clamp(16px, 2.5vh, 32px);
+    }
+
+    /* ---------- обложка ---------- */
+    .cover {
+      position: relative;
+      flex: none;
+      height: 100%;
+      max-height: 860px;
+      aspect-ratio: 1 / 1.55;   /* узкий книжный формат */
+      container-type: size;
+      background: var(--cover);
+      color: var(--cover-ink);
+      overflow: hidden;
+      border-radius: 1px 3px 3px 1px;
+      box-shadow:
+        /* лёгкий контур и тень на чёрном */
+        0 0 0 1px rgba(255,255,255,.03),
+        10px 26px 50px -18px rgba(0,0,0,.9);
+    }
+    .cover::after { /* биговка у корешка и прогиб бумаги */
+      content: "";
+      position: absolute; inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg,
+          rgba(0,0,0,.16) 0,
+          rgba(0,0,0,.04) 1.4%,
+          transparent 2.8%,
+          rgba(0,0,0,.12) 3.5%,           /* биговка — продавленная линия */
+          rgba(255,255,255,.38) 3.95%,
+          rgba(255,255,255,.08) 4.6%,
+          rgba(0,0,0,.06) 6.5%,           /* прогиб: бумага уходит вниз и снова поднимается */
+          rgba(0,0,0,.02) 9%,
+          transparent 12%),
+        radial-gradient(140% 110% at 30% 20%, rgba(255,255,255,.10) 0, transparent 55%, rgba(0,0,0,.08) 100%);
+    }
+
+
+    .cover::before { /* фактура переработанной бумаги: зерно, волокна, вкрапления */
+      content: "";
+      position: absolute; inset: 0;
+      z-index: 2;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='1' seed='8'/%3E%3CfeColorMatrix values='0 0 0 0 .18  0 0 0 0 .16  0 0 0 0 .13  0 0 0 14 -12.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      opacity: .38;
+      pointer-events: none;
+    }
+
+    /* обложка в духе Blumenhaus: логотип фольгой, картина в рамке, имена по периметру */
+    .cover.frame { background: #e6e0d4; color: #111111; }   /* переработанная бумага */
+    /* поля как у Blumenhaus: у корешка шире (16%), у края уже (9.5%) */
+    .b-logo { position: absolute; z-index: 1; top: 6.5%; left: 16%; width: 75%; height: auto; }
+    .b-sub {
+      position: absolute; z-index: 1; left: 16%; right: 9.5%; top: 19.4%;
+      margin: 0; text-align: center;
+      font-size: 1.35cqh; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .b-art { position: absolute; left: 16%; right: 9.5%; top: 24.5%; bottom: 9.5%; overflow: hidden; }
+    .b-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; display: block; }   /* рисунок остаётся на белом листе */
+    /* пустой лист вместо иллюстрации — до выхода номера */
+    .b-art.blank { background: #f8f7f3; display: flex; align-items: center; justify-content: center; }
+    .b-art.blank span { font-size: 1.15cqh; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-align: center; line-height: 1.4; color: #8b877f; }
+    .crop { position: absolute; width: 2.4cqh; height: 2.4cqh; }
+    .crop::before, .crop::after { content: ""; position: absolute; background: #9a968e; }
+    .crop::before { width: 100%; height: 1px; top: 50%; }
+    .crop::after { height: 100%; width: 1px; left: 50%; }
+    .crop.tl { top: 3%; left: 3%; } .crop.tr { top: 3%; right: 3%; }
+    .crop.bl { bottom: 3%; left: 3%; } .crop.br { bottom: 3%; right: 3%; }
+    .b-side {
+      position: absolute; z-index: 1; top: 24.5%; bottom: 9.5%;   /* та же высота, что у картины */
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .b-side.l { left: 8.5%; width: 7.5%; }   /* середина поля у корешка */
+    .b-side.r { right: 1.5%; width: 8%; }    /* середина правого поля */
+    .b-side span { writing-mode: vertical-rl; white-space: nowrap; }
+    .b-side.l span { transform: rotate(180deg); }
+    .b-name { font-size: 1.2cqh; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
+    .b-bottom {
+      position: absolute; z-index: 1; left: 16%; right: 9.5%; bottom: 3.4%;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 4%;
+    }
+    .b-bottom .b-name:first-child { text-align: left; }
+    .b-bottom .b-name:last-child { text-align: right; }
+    .b-icon { width: 3.4cqh; height: auto; fill: currentColor; display: block; }
+
+
+    /* ---------- подписка ---------- */
+    .sub { width: 100%; max-width: 380px; align-self: flex-end; }
+    .sub p { margin: 0; }
+    .sub .lead { font-size: 18px; line-height: 1.35; }
+    .sub .lead span { color: var(--muted); }
+    form { margin-top: 24px; display: grid; gap: 10px; }
+    input[type="email"] {
+      width: 100%;
+      height: 52px;
+      padding: 0 18px;
+      font: inherit;
+      color: var(--ink);
+      background: var(--field);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    input[type="email"]::placeholder { color: var(--muted); }
+    input[type="email"]:focus { border-color: var(--ink); }
+    button {
+      height: 52px;
+      font: inherit;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--ink);
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: opacity .15s, transform .1s;
+    }
+    button:hover { opacity: .82; }
+    button:active { transform: scale(.98); }
+    button[disabled] { opacity: .5; cursor: default; }
+    .note { margin-top: 12px !important; min-height: 1.5em; font-size: 13px; color: var(--muted); }
+    .note.ok { color: var(--ink); font-weight: 500; }
+    .note.err { color: var(--ink); }
+
+
+    @media (max-width: 760px) {
+      main { flex-direction: column; align-items: center; gap: 20px; margin-top: calc(var(--logo-h) * -.25); }
+      .cover { flex: 1 1 0; height: auto; min-height: 0; max-width: 100%; }
+      .sub { align-self: stretch; }
+      .masthead-meta .indent { padding-left: 1.2em; }
+      .sub { max-width: none; }
+    }
+  
+    /* ================= брутальная вёрстка ================= */
+    :root { --red: rgba(10,11,13,.6); --bg: #9da1a6; --ink: #0a0b0d; --muted: rgba(10,11,13,.6); --field: #92969b; }
+    body { height: 100svh; overflow: hidden; display: block; }
+    .bp { position: relative; height: 100svh; overflow: hidden; overflow: clip; }
+    .bp .t { position: absolute; margin: 0; font-size: 12px; font-weight: 700; line-height: 1.15; letter-spacing: .01em; text-transform: uppercase; }
+    .tl { top: 16px; left: var(--gutter); }
+    .tc { top: 16px; left: 34%; }
+    .tc2 { top: 16px; left: 58%; }
+    .tr { top: 16px; right: var(--gutter); text-align: right; }
+    .ml { top: 50%; left: var(--gutter); }
+    .mr { top: 44vh; right: var(--gutter); text-align: right; }
+
+    .cross { position: absolute; width: 15px; height: 15px; transform: translate(-50%, -50%); }
+    .cross::before, .cross::after { content: ""; position: absolute; background: var(--ink); }
+    .cross::before { left: 7px; top: 0; width: 1px; height: 15px; }
+    .cross::after { top: 7px; left: 0; height: 1px; width: 15px; }
+
+    /* лесенка содержания */
+    .cascade { position: absolute; top: calc(8.5vh - 3px); left: var(--gutter); margin: 0; padding: 0; list-style: none; color: var(--red); font-size: 12px; font-weight: 700; line-height: 1.32; text-transform: uppercase; letter-spacing: .01em; }
+    .cascade li { display: grid; grid-template-columns: 3.4em auto; margin-bottom: .75em; }
+    .cascade li:nth-child(1) { margin-left: 0; }
+    .cascade li:nth-child(2) { margin-left: 11em; }
+    .cascade li:nth-child(3) { margin-left: 4.5em; }
+    .cascade li:nth-child(4) { margin-left: 9em; }
+    .cascade li:nth-child(5) { margin-left: 1.5em; }
+    .cascade li:nth-child(6) { margin-left: 9em; }
+    .cascade li:nth-child(7) { margin-left: 3em; }
+    .cascade li:nth-child(8) { margin-left: 13em; }
+    .cascade b { font-weight: 700; }
+
+    /* огромный номер выпуска */
+    .rside { position: absolute; z-index: 3; top: 8vh; right: var(--gutter); }
+    .issue-big { display: flex; align-items: flex-start; gap: 1.2vw; }
+    .issue-big .v { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 12px; font-weight: 700; letter-spacing: .01em; text-transform: uppercase; line-height: 1.15; margin-top: 1.6vh; }
+    .issue-big .n { margin: 0; font-size: 21vh; line-height: .78; font-weight: 300; letter-spacing: -0.06em; text-align: right; }
+
+    /* гигантский логотип, срезанный низом экрана */
+    .giant { position: absolute; left: var(--gutter); right: var(--gutter); width: calc(100% - 2 * var(--gutter)); bottom: calc(var(--logo-h) * -0.42); height: auto; fill: var(--ink); }
+
+    /* ---------- журнал как у Outlander: анфас, толстый блок, крутится сам ---------- */
+    .stage { position: absolute; z-index: 3; left: 50%; top: 51%; transform: translate(-50%, -50%);
+             width: 40vw; height: 72vh; display: flex; align-items: center; justify-content: center;
+             perspective: calc(var(--H, 62vh) * 4); touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+    .stage.drag { cursor: grabbing; }
+    .book { --H: 62vh; --W: calc(var(--H) / 1.55); --T: calc(var(--W) * .09);
+            position: relative; width: var(--W); height: var(--H); transform-style: preserve-3d;
+            opacity: 0; scale: .94; transition: opacity 1.2s ease-out, scale 1.6s cubic-bezier(.22,1,.36,1); }
+    .book.in { opacity: 1; scale: 1; }
+    .book > * { position: absolute; left: 50%; top: 50%; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+    .book .f-front, .book .f-back { width: var(--W); height: var(--H); margin: calc(var(--H) / -2) 0 0 calc(var(--W) / -2); border-radius: 0; }
+    .book .f-front { transform: translateZ(calc(var(--T) / 2)); }
+    .book .f-front .cover { position: absolute; inset: 0; height: 100%; max-height: none; box-shadow: none; border-radius: inherit; }
+    .book .f-back { transform: rotateY(180deg) translateZ(calc(var(--T) / 2)); background: #111; color: #f2f0eb;
+                    display: flex; flex-direction: column; justify-content: space-between; padding: 8% 8% 7%; }
+    .book .f-back .bq { margin: 0; font: 500 calc(var(--H) * .062)/.95 var(--sans); letter-spacing: -.05em; }
+    .book .f-back .bq em { font-style: normal; color: #8c8c8c; }
+    .book .f-back .bt { margin: 0; width: 72%; font: 400 calc(var(--H) * .016)/1.35 var(--sans); color: #b9b6b0; }
+    .book .f-back .bf { display: flex; justify-content: space-between; align-items: flex-end; }
+    .book .f-back .bf svg { width: 30%; fill: #f2f0eb; }
+    .book .f-back .bf small { font: 600 calc(var(--H) * .012)/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; text-align: right; }
+    .book .f-spine, .book .f-edge { width: var(--T); height: var(--H); margin: calc(var(--H) / -2) 0 0 calc(var(--T) / -2); }
+    .book .f-spine { transform: rotateY(-90deg) translateZ(calc(var(--W) / 2)); background: #f7f6f2; color: #111; box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); }
+    .book .f-spine > * { position: absolute; left: 50%; }
+    .book .f-spine .sp-logo { top: 3.5%; width: calc(var(--H) * .2); height: auto; fill: #111; transform-origin: 0 0; transform: rotate(90deg) translateY(-50%); }
+    .book .f-spine .sp-mid, .book .f-spine .sp-iss { writing-mode: vertical-rl; transform: translateX(-50%); white-space: nowrap;
+                    font: 600 calc(var(--T) * .27)/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; }
+    .book .f-spine .sp-mid { top: 50%; transform: translate(-50%, -50%); }
+    .book .f-spine .sp-mid b { display: inline-block; font-weight: 400; font-size: 1.9em; line-height: .5; transform: translateY(.06em); }
+    .book .f-spine .sp-mid b:first-child { margin-bottom: .5em; } .book .f-spine .sp-mid b:last-child { margin-top: .5em; }
+    .book .f-spine .sp-iss { top: 84%; }
+    .book .f-spine .sp-num { bottom: 2.6%; transform: translateX(-50%); font: 500 calc(var(--T) * .2)/1.15 var(--sans); text-align: center; letter-spacing: 0; }
+    .book .f-edge { transform: rotateY(90deg) translateZ(calc(var(--W) / 2)); background: #f7f6f2; }
+    .book .f-top, .book .f-bottom { width: var(--W); height: var(--T); margin: calc(var(--T) / -2) 0 0 calc(var(--W) / -2); background: #f2f0ea; }
+    .book .f-top { transform: rotateX(90deg) translateZ(calc(var(--H) / 2)); }
+    .book .f-bottom { transform: rotateX(-90deg) translateZ(calc(var(--H) / 2)); }
+    .book .f-front { background: #6e7277; }
+    .book .locked { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #1a1a1a; text-align: center; }
+    .book .locked .lock { width: 11%; height: auto; margin-bottom: 4.5%; }
+    .book .locked p { margin: 0; text-transform: uppercase; font-family: var(--sans); }
+    .book .locked .l1 { font-size: calc(var(--H) * .026); font-weight: 700; letter-spacing: .02em; }
+    .book .locked .l2 { margin-top: 2.6% !important; font-size: calc(var(--H) * .017); font-weight: 600; letter-spacing: .06em; color: #333; }
+    .ig { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+    .ig:hover { color: var(--red); }
+    .mag-label { position: absolute; z-index: 3; left: 50%; top: calc(51% - 31vh - 46px); transform: translateX(-50%); margin: 0;
+                 font-size: 12px; font-weight: 700; letter-spacing: .01em; line-height: 1.32; text-transform: uppercase; white-space: nowrap; }
+
+    /* название выпуска и вопрос */
+    /* текст справа: ритм — вопрос, затем абзацы с красной строкой, без отбивок, как в книге */
+    .essay { position: absolute; z-index: 3; right: var(--gutter); top: var(--row2); width: min(25vw, 380px); margin: 0; }
+    .essay p { margin: 0; font-size: 12px; line-height: 1.32; font-weight: 700; letter-spacing: .01em; text-transform: uppercase; color: var(--muted); text-indent: 33%; }
+    .essay .q { text-indent: 0; }
+    .essay .q + p { text-indent: 33%; }
+    .essay em { font-style: normal; color: var(--ink); }
+    /* форма — тихая: строка ввода, кнопка появляется, когда введён адрес */
+    /* подписка: одна плашка, которая раскрывается из кнопки «Подписка ↑» в форму */
+    .pop-wrap { position: fixed; z-index: 20; right: var(--gutter); bottom: var(--gutter);
+                opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .6s cubic-bezier(.22,1,.36,1); }
+    .pop-wrap.in { opacity: 1; transform: none; }
+    .b-form { --ink: #0a0a0a; --muted: rgba(10,10,10,.42);
+              width: min(340px, calc(100vw - 2 * var(--gutter))); background: #fff; color: var(--ink); }
+    .b-form .pop-head { display: flex; justify-content: space-between; align-items: center; width: 100%; height: auto; padding: 13px 18px; border-radius: 0;
+                        background: transparent; color: var(--ink); font: 700 12px/1.32 var(--sans); letter-spacing: .01em; text-transform: uppercase; text-align: left; cursor: pointer; }
+    .b-form .pop-head:hover, .b-form .pop-head:active { opacity: 1; transform: none; }
+    .b-form .pop-ic { display: inline-block; font-size: 15px; font-weight: 400; line-height: 1; transition: transform .45s cubic-bezier(.22,1,.36,1); }
+    .b-form .pop-ic::before { content: "↑"; }
+    .b-form:not(.closed) .pop-ic::before { content: "×"; font-size: 18px; }
+    .b-form .pop-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .55s cubic-bezier(.22,1,.36,1); }
+    .b-form.closed .pop-body { grid-template-rows: 0fr; }
+    .b-form .pop-inner { min-height: 0; overflow: hidden; }
+    .b-form .pop-pad { padding: 0 18px 16px; opacity: 1; transition: opacity .35s .15s; }
+    .b-form.closed .pop-pad { opacity: 0; transition: opacity .2s; }
+    .b-form .lead { margin: 0; font-size: 12px; line-height: 1.32; font-weight: 700; letter-spacing: .01em; text-transform: uppercase; color: var(--muted); }
+    .b-form form { position: relative; margin-top: 10px; display: block; }
+    .b-form input[type="email"] { height: 36px; width: 100%; padding: 0 0 0 0; border-radius: 0; background: transparent; border: 0; border-bottom: 1px solid rgba(10,10,10,.35); font-size: 12px; font-weight: 700; letter-spacing: .01em; text-transform: uppercase; }
+    .b-form input[type="email"]:focus { border-bottom-color: var(--ink); }
+    .b-form form button { position: absolute; right: 0; bottom: 1px; width: 24px; height: 34px; padding: 0; border-radius: 0; background: transparent; color: var(--ink);
+                     font-size: 16px; font-weight: 500; line-height: 1; text-align: right;
+                     opacity: 0; transform: translateX(-6px); pointer-events: none; transition: opacity .25s, transform .25s; }
+    .b-form form.ready input[type="email"] { padding-right: 28px; }
+    .b-form form.ready button { opacity: 1; transform: none; pointer-events: auto; }
+    .b-form form button:hover { opacity: 1; background: transparent; transform: translateX(3px); }
+    .b-form .note { margin-top: 8px !important; min-height: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .01em; }
+    .bp { --row2: 52vh; --tf: clamp(28px, 3.3vw, 56px); }
+    .lblock { position: absolute; z-index: 2; left: var(--gutter); top: var(--row2); font-size: var(--tf); }
+    .issue-title { margin: 0; white-space: nowrap;
+                   font-size: clamp(28px, 3.3vw, 56px); line-height: .95; font-weight: 500; letter-spacing: -0.045em; }
+
+
+    @media (max-width: 1100px) {
+      body { height: auto; overflow: auto; padding-bottom: 76px; }
+      .bp { height: auto; overflow: visible; padding: 16px var(--gutter) 0; display: flex; flex-direction: column; gap: 22px; }
+      .bp .t, .cross, .ml, .mr { display: none; }
+      .bp { position: relative; }
+      .tops { display: contents; }
+      .bp .tl { display: block; position: static; order: 0; margin-top: -12px; }
+      .bp .tc2 { display: block; position: absolute; top: calc(16px + var(--logo-h) + 10px); left: auto; right: var(--gutter); }
+      .bp .tr { display: block; position: static; order: 6; align-self: center; text-align: center; margin: 8px 0 var(--gutter); }
+      .rside { display: contents; }
+      .issue-big { order: 1; }
+      .cascade { order: 2; }
+      .lblock { order: 3; }
+      .mag-label, .bp .stage { order: 4; }
+      .essay { order: 3; }
+      .giant { order: -1; }
+      .issue-big { justify-content: flex-end; }
+      .issue-big .n { font-size: min(30vw, 280px); }
+      .cascade { position: static; }
+      .cascade li:nth-child(1) { margin-left: 0; }
+      .cascade li:nth-child(2) { margin-left: 7em; }
+      .cascade li:nth-child(3) { margin-left: 2.5em; }
+      .cascade li:nth-child(4) { margin-left: 5em; }
+      .cascade li:nth-child(5) { margin-left: 1.2em; }
+      .bp .stage { flex: none; position: relative; left: auto; top: auto; transform: none; width: 100%; height: min(108vw, 760px); align-self: center; }
+      .bp .book { --H: min(92vw, 640px); }
+      .mag-label { position: static; transform: none; align-self: center; margin-bottom: -14px; }
+      .lblock { position: static; }
+      .essay { position: static; width: 100%; max-width: 560px; }
+      .issue-title { font-size: min(9.4vw, 80px); }
+      .giant { position: static; width: 100%; height: var(--logo-h); margin: 0; }
+      .bp { overflow: hidden; }
+      .pop-wrap { left: 0; right: 0; display: flex; justify-content: center; pointer-events: none; }
+      .pop-wrap .b-form { pointer-events: auto; }
+    }
+</style>
+</head>
+<body>
+<div class="bp">
+  <div class="tops">
+    <p class="t tl">Tropa<br>журнал о тех, кто уехал</p>
+    <p class="t tr">digital periodical<br>research publication</p>
+  </div>
+  <p class="t tc">Issue 01<br>Winter 2026</p>
+  <p class="t tc2"><a class="ig" href="https://www.instagram.com/tropa.media/" target="_blank" rel="noopener">Instagram ↗</a></p>
+
+
+  <ol class="cascade">
+    <li><b>01</b><span>«Ничего себе,<br>какой я был смелый»</span></li>
+    <li><b>02</b><span>«Я — лошадь, которая<br>бежит против стада»</span></li>
+    <li><b>03</b><span>«Недостаточно просто<br>взять и появиться<br>из коробки»</span></li>
+    <li><b>04</b><span>«Если у меня и есть какая-то<br>роль в российском дизайне,<br>то я скорее архиватор»</span></li>
+    <li><b>05</b><span>Скоро</span></li>
+  </ol>
+
+<div class="rside">
+  <div class="issue-big">
+    <span class="v">winter issue · interviews 05</span>
+    <p class="n">ISSU<br>E&nbsp;01</p>
+  </div>
+  </div>
+
+  <h1 class="sr">Tropa — журнал о тех, кто уехал</h1>
+  <div class="lblock">
+  <h2 class="issue-title">Российская культура<br>дизайна: input/<br>output</h2>
+  </div>
+  <section class="essay">
+    <p class="q">В какой момент дизайн становится российским?</p>
+    <p>Когда его делает человек, выросший в&nbsp;России? Когда он работает на&nbsp;российскую компанию? Когда его можно узнать визуально?</p>
+    <p>Или только тогда, когда существует среда, внутри которой дизайнеры смотрят друг на&nbsp;друга, спорят, учатся друг у&nbsp;друга и&nbsp;постепенно вырабатывают общий язык?</p>
+  </section>
+
+  <p class="mag-label">Tropa: Issue 01</p>
+  <div class="stage" id="stage" aria-label="Журнал Tropa, Issue 01. Можно покрутить">
+    <div class="book" id="book">
+      <div class="f-front"><div class="locked" role="img" aria-label="Обложка Tropa Issue 01 появится в день выхода">
+        <svg class="lock" viewBox="0 0 100 120" aria-hidden="true"><path d="M24 52V36a26 26 0 0 1 52 0v16" fill="none" stroke="#1a1a1a" stroke-width="11"/><rect x="0" y="48" width="100" height="72" rx="6" fill="#1a1a1a"/><svg x="27" y="66" width="46" height="36" viewBox="0 0 124 97"><g fill="#6e7277"><path d="M68.743 96.8052C66.2737 96.8052 63.8463 96.7634 61.4607 96.6797C59.0751 96.596 56.7732 96.4704 54.555 96.303C50.0767 95.9682 45.9333 95.3613 42.1247 94.4824C38.3161 93.6454 34.8633 92.4526 31.7662 90.904C28.7109 89.3136 26.0742 87.3047 23.856 84.8772C21.6797 82.4079 20.0056 79.4364 18.8337 75.9626C17.6618 72.4888 17.0759 68.3663 17.0759 63.5951L17.0759 36.9141H0L0 31.0128C7.57533 31.0128 14.8786 30.385 21.9099 29.1295C28.983 27.8739 35.3864 25.9905 41.1203 23.4794C46.9796 20.9263 51.8136 17.7037 55.6222 13.8114C59.4308 9.87723 61.7118 5.27344 62.4651 0L75.7743 0V28.2506L115.137 28.2506V36.9141L75.7743 36.9141V56.5011C75.7743 62.2349 76.0254 67.1108 76.5276 71.1286C77.0299 75.1046 77.9297 78.3273 79.2271 80.7966C81.7383 85.5678 86.5095 87.9534 93.5407 87.9534C97.3912 87.9534 101.032 87.4302 104.464 86.3839C107.896 85.3376 110.7 83.517 112.877 80.9221C115.053 78.3273 116.141 74.728 116.141 70.1242H123.737C123.737 74.5187 122.942 78.3482 121.352 81.6127C119.761 84.8772 116.957 87.6395 112.939 89.8996C110.219 91.4062 106.85 92.6618 102.832 93.6663C98.7723 94.7126 93.9174 95.4869 88.2673 95.9891C82.659 96.5332 76.1509 96.8052 68.743 96.8052Z"/></g></svg></svg>
+        <p class="l1">Issue 01</p>
+        <p class="l2">Выйдет зимой 2026</p>
+      </div></div>
+      <div class="f-back"><p class="bq">В какой момент дизайн становится <em>российским?</em></p><div class="bf"><svg viewBox="0 0 777 123" aria-hidden="true"><path d="M642.814 96.8053C636.243 96.8053 630.279 96.1356 624.922 94.7963C619.564 93.4989 615.295 91.5946 612.115 89.0835C608.976 86.5723 607.406 83.5798 607.406 80.1061C607.406 76.423 608.536 73.3678 610.796 70.9403C613.056 68.5129 616.049 66.5877 619.774 65.1647C623.499 63.7835 627.747 62.8209 632.518 62.2768C637.331 61.6909 642.27 61.3979 647.334 61.3979C653.402 61.3979 659.241 61.4816 664.849 61.649C670.457 61.7746 675.522 61.9629 680.042 62.214C684.604 62.4652 688.287 62.7581 691.091 63.0929V49.4699C691.091 42.8572 689.186 38.1697 685.378 35.4074C683.453 34.0263 680.962 33.0218 677.907 32.394C674.894 31.7662 671.336 31.4523 667.235 31.4523C661.124 31.4523 655.39 31.6197 650.033 31.9546C658.027 31.9546 664.451 33.0637 669.306 35.2818C674.161 37.4582 676.589 40.3669 676.589 44.0081C676.589 46.7704 675.291 49.0932 672.696 50.9766C670.102 52.86 666.607 54.283 662.212 55.2456C657.818 56.1663 652.921 56.6267 647.522 56.6267C643.797 56.6267 640.24 56.271 636.85 55.5595C633.501 54.848 630.53 53.8644 627.935 52.6089C625.34 51.3951 623.268 49.9512 621.72 48.2771C620.213 46.5611 619.46 44.7196 619.46 42.7525C619.46 39.6973 621.197 37.0606 624.671 34.8424C628.144 32.6242 632.581 30.8245 637.98 29.4434C643.211 28.1041 648.882 27.0996 654.993 26.43C661.145 25.7604 667.507 25.4255 674.078 25.4255C682.867 25.4255 691.53 25.572 700.068 25.865C708.648 26.158 716.788 27.1415 724.489 28.8156C731.646 30.3642 737.484 32.8962 742.005 36.4119C746.525 39.8856 748.785 44.6778 748.785 50.7883V65.7924C748.785 69.6847 749.036 72.8237 749.538 75.2093C750.082 77.5949 750.814 79.4573 751.735 80.7966C752.656 82.0941 753.744 82.973 755 83.4333C756.255 83.8937 757.595 84.1239 759.018 84.1239C761.654 84.1239 763.956 83.0567 765.923 80.9222C767.89 78.7877 768.958 75.6906 769.125 71.6309H776.219C776.219 77.6577 774.859 82.3033 772.138 85.5678C769.418 88.8323 766.216 91.197 762.533 92.6619C758.097 94.4615 753.263 95.5916 748.031 96.0519C742.842 96.5542 737.275 96.8053 731.332 96.8053C721.831 96.8053 713.859 96.2403 707.413 95.1102C701.01 93.9802 696.469 91.2598 693.79 86.949C692.032 88.1627 689.793 89.3555 687.073 90.5274C684.394 91.6574 681.046 92.7037 677.028 93.6663C672.968 94.5871 668.135 95.3404 662.526 95.9264C656.918 96.5123 650.347 96.8053 642.814 96.8053ZM673.387 85.0656C675.814 85.0656 678.577 84.9191 681.674 84.6262C684.813 84.3332 688.161 83.4543 691.719 81.9894C691.3 80.3572 691.091 78.3064 691.091 75.8371V69.1197C689.291 69.036 687.47 68.9942 685.629 68.9942C683.787 68.9523 682.009 68.9314 680.293 68.9314C677.447 68.9314 674.936 69.036 672.759 69.2453C670.625 69.4546 668.825 69.8522 667.36 70.4381C664.431 71.6937 662.966 73.8909 662.966 77.0299C662.966 78.704 663.719 80.4618 665.226 82.3033C666.774 84.1448 669.495 85.0656 673.387 85.0656Z"/><path d="M428.23 122.984V117.083C431.872 116.957 435.199 116.602 438.212 116.016C443.988 114.886 448.32 112.437 451.208 108.671C452.672 106.703 453.865 104.297 454.786 101.451C455.665 98.5631 456.293 95.1312 456.669 91.1552C457.088 87.1792 457.297 82.5754 457.297 77.3438C457.297 74.6652 457.234 72.175 457.109 69.8731C456.983 67.5293 456.816 65.353 456.607 63.3441C455.602 55.4339 453.572 49.5745 450.517 45.7659C448.968 43.8407 447.127 42.3131 444.992 41.1831C442.816 40.0531 440.326 39.2578 437.522 38.7975C434.759 38.3371 431.662 38.1069 428.23 38.1069V32.2057L512.48 26.5556V34.9679C514.238 33.6287 516.309 32.394 518.695 31.264C521.122 30.0921 523.927 29.0667 527.107 28.1878C530.288 27.3508 533.888 26.6811 537.905 26.1789C541.965 25.6767 546.506 25.4255 551.528 25.4255C560.694 25.4255 568.395 26.3044 574.631 28.0623C580.909 29.8201 585.931 32.2685 589.698 35.4074C593.465 38.5045 596.164 42.1457 597.797 46.3309C599.471 50.4744 600.308 54.9735 600.308 59.8284C600.308 65.9808 599.073 71.3589 596.604 75.9626C594.135 80.5664 590.723 84.4169 586.371 87.514C582.018 90.5692 576.891 92.8711 570.99 94.4197C565.089 96.0101 558.727 96.8053 551.905 96.8053C544.958 96.8053 537.926 96.031 530.811 94.4825C523.696 92.9339 517.586 90.7576 512.48 87.9534V93.478C512.48 98.9188 513.422 103.313 515.305 106.662C517.23 110.052 520.516 112.563 525.161 114.195C529.849 115.827 536.336 116.79 544.623 117.083V122.984L428.23 122.984ZM528.551 86.7606C531.9 86.7606 534.327 84.668 535.834 80.4827C537.299 76.2975 538.031 69.9149 538.031 61.3351C538.031 57.4428 537.864 53.9691 537.529 50.9138C537.236 47.8167 536.692 45.2009 535.896 43.0664C534.264 38.6719 531.565 36.4746 527.798 36.4746C524.575 36.4746 521.604 37.2071 518.883 38.6719C516.205 40.1368 514.07 42.0411 512.48 44.3848V79.1016C515.368 81.7383 518.235 83.6845 521.081 84.94C523.968 86.1538 526.459 86.7606 528.551 86.7606Z"/><path d="M354.585 96.8053C339.518 96.8053 326.314 95.5079 314.972 92.913C303.671 90.3181 294.882 86.384 288.604 81.1106C282.326 75.8371 279.188 69.1825 279.188 61.1468C279.188 55.0782 280.987 49.7838 284.586 45.2637C288.228 40.7437 293.355 37.0188 299.967 34.0891C306.58 31.1175 314.511 28.9203 323.761 27.4973C333.01 26.0743 343.285 25.3628 354.585 25.3628C365.843 25.3628 376.118 26.0743 385.41 27.4973C394.701 28.9203 402.632 31.1175 409.203 34.0891C415.816 37.0188 420.922 40.7437 424.521 45.2637C428.12 49.7838 429.92 55.0782 429.92 61.1468C429.92 67.1736 428.12 72.4261 424.521 76.9044C420.922 81.3408 415.816 85.0447 409.203 88.0163C402.632 90.9459 394.701 93.1432 385.41 94.608C376.118 96.0729 365.843 96.8053 354.585 96.8053ZM354.585 90.2135C356.552 90.2135 358.31 89.4392 359.859 87.8907C361.449 86.3003 362.809 84.1658 363.939 81.4872C366.199 76.0464 367.329 69.2663 367.329 61.1468C367.329 52.9437 366.199 46.1008 363.939 40.6181C362.809 37.9395 361.449 35.805 359.859 34.2146C358.31 32.6242 356.552 31.829 354.585 31.829C352.576 31.829 350.776 32.6242 349.186 34.2146C347.638 35.805 346.319 37.9395 345.231 40.6181C344.101 43.2967 343.243 46.4147 342.657 49.9722C342.071 53.4878 341.778 57.2127 341.778 61.1468C341.778 65.0391 342.071 68.7431 342.657 72.2587C343.243 75.7743 344.101 78.8505 345.231 81.4872C346.319 84.1658 347.638 86.3003 349.186 87.8907C350.776 89.4392 352.576 90.2135 354.585 90.2135Z"/><path d="M124.307 93.9802V88.079C131.798 87.786 137.658 86.5932 141.885 84.5006C146.112 82.3661 149.083 79.3946 150.799 75.586C152.515 71.7355 153.373 67.0899 153.373 61.649C153.373 53.2785 151.113 47.2517 146.593 43.5687C142.115 39.8856 134.686 38.0441 124.307 38.0441V32.1429L208.556 26.4928V35.7841C213.285 32.4777 219.04 29.9247 225.82 28.125C232.6 26.3254 239.276 25.4255 245.847 25.4255C251.037 25.4255 255.515 25.865 259.282 26.7439C263.09 27.6228 266.25 28.8575 268.761 30.4479C273.616 33.6287 276.044 38.0441 276.044 43.6942C276.044 48.0051 273.595 51.7718 268.698 54.9945C266.313 56.543 263.362 57.8195 259.847 58.824C256.373 59.7866 252.397 60.2679 247.919 60.2679C239.883 60.2679 233.396 59.0542 228.457 56.6267C223.56 54.283 221.112 51.1649 221.112 47.2726C221.112 44.2592 222.242 41.7899 224.502 39.8647C226.804 37.9395 229.671 36.4956 233.103 35.533C236.535 34.5703 239.967 34.0681 243.398 34.0263C235.823 34.0263 229.378 34.7168 224.062 36.098C218.789 37.4373 213.62 39.6554 208.556 42.7525V61.084C208.556 67.069 209.54 72.0076 211.507 75.8999C213.474 79.7503 216.78 82.6591 221.426 84.6262C226.071 86.5932 232.391 87.7442 240.385 88.079V93.9802L124.307 93.9802Z"/><path d="M68.743 96.8052C66.2737 96.8052 63.8463 96.7634 61.4607 96.6797C59.0751 96.596 56.7732 96.4704 54.555 96.303C50.0767 95.9682 45.9333 95.3613 42.1247 94.4824C38.3161 93.6454 34.8633 92.4526 31.7662 90.904C28.7109 89.3136 26.0742 87.3047 23.856 84.8772C21.6797 82.4079 20.0056 79.4364 18.8337 75.9626C17.6618 72.4888 17.0759 68.3663 17.0759 63.5951L17.0759 36.9141H0L0 31.0128C7.57533 31.0128 14.8786 30.385 21.9099 29.1295C28.983 27.8739 35.3864 25.9905 41.1203 23.4794C46.9796 20.9263 51.8136 17.7037 55.6222 13.8114C59.4308 9.87723 61.7118 5.27344 62.4651 0L75.7743 0V28.2506L115.137 28.2506V36.9141L75.7743 36.9141V56.5011C75.7743 62.2349 76.0254 67.1108 76.5276 71.1286C77.0299 75.1046 77.9297 78.3273 79.2271 80.7966C81.7383 85.5678 86.5095 87.9534 93.5407 87.9534C97.3912 87.9534 101.032 87.4302 104.464 86.3839C107.896 85.3376 110.7 83.517 112.877 80.9221C115.053 78.3273 116.141 74.728 116.141 70.1242H123.737C123.737 74.5187 122.942 78.3482 121.352 81.6127C119.761 84.8772 116.957 87.6395 112.939 89.8996C110.219 91.4062 106.85 92.6618 102.832 93.6663C98.7723 94.7126 93.9174 95.4869 88.2673 95.9891C82.659 96.5332 76.1509 96.8052 68.743 96.8052Z"/></svg><small>Issue 01<br>Winter 2026</small></div></div>
+      <div class="f-spine"><svg class="sp-logo" viewBox="0 0 777 123" aria-hidden="true"><path d="M642.814 96.8053C636.243 96.8053 630.279 96.1356 624.922 94.7963C619.564 93.4989 615.295 91.5946 612.115 89.0835C608.976 86.5723 607.406 83.5798 607.406 80.1061C607.406 76.423 608.536 73.3678 610.796 70.9403C613.056 68.5129 616.049 66.5877 619.774 65.1647C623.499 63.7835 627.747 62.8209 632.518 62.2768C637.331 61.6909 642.27 61.3979 647.334 61.3979C653.402 61.3979 659.241 61.4816 664.849 61.649C670.457 61.7746 675.522 61.9629 680.042 62.214C684.604 62.4652 688.287 62.7581 691.091 63.0929V49.4699C691.091 42.8572 689.186 38.1697 685.378 35.4074C683.453 34.0263 680.962 33.0218 677.907 32.394C674.894 31.7662 671.336 31.4523 667.235 31.4523C661.124 31.4523 655.39 31.6197 650.033 31.9546C658.027 31.9546 664.451 33.0637 669.306 35.2818C674.161 37.4582 676.589 40.3669 676.589 44.0081C676.589 46.7704 675.291 49.0932 672.696 50.9766C670.102 52.86 666.607 54.283 662.212 55.2456C657.818 56.1663 652.921 56.6267 647.522 56.6267C643.797 56.6267 640.24 56.271 636.85 55.5595C633.501 54.848 630.53 53.8644 627.935 52.6089C625.34 51.3951 623.268 49.9512 621.72 48.2771C620.213 46.5611 619.46 44.7196 619.46 42.7525C619.46 39.6973 621.197 37.0606 624.671 34.8424C628.144 32.6242 632.581 30.8245 637.98 29.4434C643.211 28.1041 648.882 27.0996 654.993 26.43C661.145 25.7604 667.507 25.4255 674.078 25.4255C682.867 25.4255 691.53 25.572 700.068 25.865C708.648 26.158 716.788 27.1415 724.489 28.8156C731.646 30.3642 737.484 32.8962 742.005 36.4119C746.525 39.8856 748.785 44.6778 748.785 50.7883V65.7924C748.785 69.6847 749.036 72.8237 749.538 75.2093C750.082 77.5949 750.814 79.4573 751.735 80.7966C752.656 82.0941 753.744 82.973 755 83.4333C756.255 83.8937 757.595 84.1239 759.018 84.1239C761.654 84.1239 763.956 83.0567 765.923 80.9222C767.89 78.7877 768.958 75.6906 769.125 71.6309H776.219C776.219 77.6577 774.859 82.3033 772.138 85.5678C769.418 88.8323 766.216 91.197 762.533 92.6619C758.097 94.4615 753.263 95.5916 748.031 96.0519C742.842 96.5542 737.275 96.8053 731.332 96.8053C721.831 96.8053 713.859 96.2403 707.413 95.1102C701.01 93.9802 696.469 91.2598 693.79 86.949C692.032 88.1627 689.793 89.3555 687.073 90.5274C684.394 91.6574 681.046 92.7037 677.028 93.6663C672.968 94.5871 668.135 95.3404 662.526 95.9264C656.918 96.5123 650.347 96.8053 642.814 96.8053ZM673.387 85.0656C675.814 85.0656 678.577 84.9191 681.674 84.6262C684.813 84.3332 688.161 83.4543 691.719 81.9894C691.3 80.3572 691.091 78.3064 691.091 75.8371V69.1197C689.291 69.036 687.47 68.9942 685.629 68.9942C683.787 68.9523 682.009 68.9314 680.293 68.9314C677.447 68.9314 674.936 69.036 672.759 69.2453C670.625 69.4546 668.825 69.8522 667.36 70.4381C664.431 71.6937 662.966 73.8909 662.966 77.0299C662.966 78.704 663.719 80.4618 665.226 82.3033C666.774 84.1448 669.495 85.0656 673.387 85.0656Z"/><path d="M428.23 122.984V117.083C431.872 116.957 435.199 116.602 438.212 116.016C443.988 114.886 448.32 112.437 451.208 108.671C452.672 106.703 453.865 104.297 454.786 101.451C455.665 98.5631 456.293 95.1312 456.669 91.1552C457.088 87.1792 457.297 82.5754 457.297 77.3438C457.297 74.6652 457.234 72.175 457.109 69.8731C456.983 67.5293 456.816 65.353 456.607 63.3441C455.602 55.4339 453.572 49.5745 450.517 45.7659C448.968 43.8407 447.127 42.3131 444.992 41.1831C442.816 40.0531 440.326 39.2578 437.522 38.7975C434.759 38.3371 431.662 38.1069 428.23 38.1069V32.2057L512.48 26.5556V34.9679C514.238 33.6287 516.309 32.394 518.695 31.264C521.122 30.0921 523.927 29.0667 527.107 28.1878C530.288 27.3508 533.888 26.6811 537.905 26.1789C541.965 25.6767 546.506 25.4255 551.528 25.4255C560.694 25.4255 568.395 26.3044 574.631 28.0623C580.909 29.8201 585.931 32.2685 589.698 35.4074C593.465 38.5045 596.164 42.1457 597.797 46.3309C599.471 50.4744 600.308 54.9735 600.308 59.8284C600.308 65.9808 599.073 71.3589 596.604 75.9626C594.135 80.5664 590.723 84.4169 586.371 87.514C582.018 90.5692 576.891 92.8711 570.99 94.4197C565.089 96.0101 558.727 96.8053 551.905 96.8053C544.958 96.8053 537.926 96.031 530.811 94.4825C523.696 92.9339 517.586 90.7576 512.48 87.9534V93.478C512.48 98.9188 513.422 103.313 515.305 106.662C517.23 110.052 520.516 112.563 525.161 114.195C529.849 115.827 536.336 116.79 544.623 117.083V122.984L428.23 122.984ZM528.551 86.7606C531.9 86.7606 534.327 84.668 535.834 80.4827C537.299 76.2975 538.031 69.9149 538.031 61.3351C538.031 57.4428 537.864 53.9691 537.529 50.9138C537.236 47.8167 536.692 45.2009 535.896 43.0664C534.264 38.6719 531.565 36.4746 527.798 36.4746C524.575 36.4746 521.604 37.2071 518.883 38.6719C516.205 40.1368 514.07 42.0411 512.48 44.3848V79.1016C515.368 81.7383 518.235 83.6845 521.081 84.94C523.968 86.1538 526.459 86.7606 528.551 86.7606Z"/><path d="M354.585 96.8053C339.518 96.8053 326.314 95.5079 314.972 92.913C303.671 90.3181 294.882 86.384 288.604 81.1106C282.326 75.8371 279.188 69.1825 279.188 61.1468C279.188 55.0782 280.987 49.7838 284.586 45.2637C288.228 40.7437 293.355 37.0188 299.967 34.0891C306.58 31.1175 314.511 28.9203 323.761 27.4973C333.01 26.0743 343.285 25.3628 354.585 25.3628C365.843 25.3628 376.118 26.0743 385.41 27.4973C394.701 28.9203 402.632 31.1175 409.203 34.0891C415.816 37.0188 420.922 40.7437 424.521 45.2637C428.12 49.7838 429.92 55.0782 429.92 61.1468C429.92 67.1736 428.12 72.4261 424.521 76.9044C420.922 81.3408 415.816 85.0447 409.203 88.0163C402.632 90.9459 394.701 93.1432 385.41 94.608C376.118 96.0729 365.843 96.8053 354.585 96.8053ZM354.585 90.2135C356.552 90.2135 358.31 89.4392 359.859 87.8907C361.449 86.3003 362.809 84.1658 363.939 81.4872C366.199 76.0464 367.329 69.2663 367.329 61.1468C367.329 52.9437 366.199 46.1008 363.939 40.6181C362.809 37.9395 361.449 35.805 359.859 34.2146C358.31 32.6242 356.552 31.829 354.585 31.829C352.576 31.829 350.776 32.6242 349.186 34.2146C347.638 35.805 346.319 37.9395 345.231 40.6181C344.101 43.2967 343.243 46.4147 342.657 49.9722C342.071 53.4878 341.778 57.2127 341.778 61.1468C341.778 65.0391 342.071 68.7431 342.657 72.2587C343.243 75.7743 344.101 78.8505 345.231 81.4872C346.319 84.1658 347.638 86.3003 349.186 87.8907C350.776 89.4392 352.576 90.2135 354.585 90.2135Z"/><path d="M124.307 93.9802V88.079C131.798 87.786 137.658 86.5932 141.885 84.5006C146.112 82.3661 149.083 79.3946 150.799 75.586C152.515 71.7355 153.373 67.0899 153.373 61.649C153.373 53.2785 151.113 47.2517 146.593 43.5687C142.115 39.8856 134.686 38.0441 124.307 38.0441V32.1429L208.556 26.4928V35.7841C213.285 32.4777 219.04 29.9247 225.82 28.125C232.6 26.3254 239.276 25.4255 245.847 25.4255C251.037 25.4255 255.515 25.865 259.282 26.7439C263.09 27.6228 266.25 28.8575 268.761 30.4479C273.616 33.6287 276.044 38.0441 276.044 43.6942C276.044 48.0051 273.595 51.7718 268.698 54.9945C266.313 56.543 263.362 57.8195 259.847 58.824C256.373 59.7866 252.397 60.2679 247.919 60.2679C239.883 60.2679 233.396 59.0542 228.457 56.6267C223.56 54.283 221.112 51.1649 221.112 47.2726C221.112 44.2592 222.242 41.7899 224.502 39.8647C226.804 37.9395 229.671 36.4956 233.103 35.533C236.535 34.5703 239.967 34.0681 243.398 34.0263C235.823 34.0263 229.378 34.7168 224.062 36.098C218.789 37.4373 213.62 39.6554 208.556 42.7525V61.084C208.556 67.069 209.54 72.0076 211.507 75.8999C213.474 79.7503 216.78 82.6591 221.426 84.6262C226.071 86.5932 232.391 87.7442 240.385 88.079V93.9802L124.307 93.9802Z"/><path d="M68.743 96.8052C66.2737 96.8052 63.8463 96.7634 61.4607 96.6797C59.0751 96.596 56.7732 96.4704 54.555 96.303C50.0767 95.9682 45.9333 95.3613 42.1247 94.4824C38.3161 93.6454 34.8633 92.4526 31.7662 90.904C28.7109 89.3136 26.0742 87.3047 23.856 84.8772C21.6797 82.4079 20.0056 79.4364 18.8337 75.9626C17.6618 72.4888 17.0759 68.3663 17.0759 63.5951L17.0759 36.9141H0L0 31.0128C7.57533 31.0128 14.8786 30.385 21.9099 29.1295C28.983 27.8739 35.3864 25.9905 41.1203 23.4794C46.9796 20.9263 51.8136 17.7037 55.6222 13.8114C59.4308 9.87723 61.7118 5.27344 62.4651 0L75.7743 0V28.2506L115.137 28.2506V36.9141L75.7743 36.9141V56.5011C75.7743 62.2349 76.0254 67.1108 76.5276 71.1286C77.0299 75.1046 77.9297 78.3273 79.2271 80.7966C81.7383 85.5678 86.5095 87.9534 93.5407 87.9534C97.3912 87.9534 101.032 87.4302 104.464 86.3839C107.896 85.3376 110.7 83.517 112.877 80.9221C115.053 78.3273 116.141 74.728 116.141 70.1242H123.737C123.737 74.5187 122.942 78.3482 121.352 81.6127C119.761 84.8772 116.957 87.6395 112.939 89.8996C110.219 91.4062 106.85 92.6618 102.832 93.6663C98.7723 94.7126 93.9174 95.4869 88.2673 95.9891C82.659 96.5332 76.1509 96.8052 68.743 96.8052Z"/></svg><span class="sp-mid"><b>(</b>Журнал о тех, кто уехал<b>)</b></span><span class="sp-iss">Issue 01</span><span class="sp-num">01<br>2026</span></div>
+      <div class="f-edge"></div>
+      <div class="f-top"></div>
+      <div class="f-bottom"></div>
+    </div>
+  </div>
+
+
+  <svg class="giant" viewBox="0 0 777 123" role="img" aria-label="Tropa"><path d="M642.814 96.8053C636.243 96.8053 630.279 96.1356 624.922 94.7963C619.564 93.4989 615.295 91.5946 612.115 89.0835C608.976 86.5723 607.406 83.5798 607.406 80.1061C607.406 76.423 608.536 73.3678 610.796 70.9403C613.056 68.5129 616.049 66.5877 619.774 65.1647C623.499 63.7835 627.747 62.8209 632.518 62.2768C637.331 61.6909 642.27 61.3979 647.334 61.3979C653.402 61.3979 659.241 61.4816 664.849 61.649C670.457 61.7746 675.522 61.9629 680.042 62.214C684.604 62.4652 688.287 62.7581 691.091 63.0929V49.4699C691.091 42.8572 689.186 38.1697 685.378 35.4074C683.453 34.0263 680.962 33.0218 677.907 32.394C674.894 31.7662 671.336 31.4523 667.235 31.4523C661.124 31.4523 655.39 31.6197 650.033 31.9546C658.027 31.9546 664.451 33.0637 669.306 35.2818C674.161 37.4582 676.589 40.3669 676.589 44.0081C676.589 46.7704 675.291 49.0932 672.696 50.9766C670.102 52.86 666.607 54.283 662.212 55.2456C657.818 56.1663 652.921 56.6267 647.522 56.6267C643.797 56.6267 640.24 56.271 636.85 55.5595C633.501 54.848 630.53 53.8644 627.935 52.6089C625.34 51.3951 623.268 49.9512 621.72 48.2771C620.213 46.5611 619.46 44.7196 619.46 42.7525C619.46 39.6973 621.197 37.0606 624.671 34.8424C628.144 32.6242 632.581 30.8245 637.98 29.4434C643.211 28.1041 648.882 27.0996 654.993 26.43C661.145 25.7604 667.507 25.4255 674.078 25.4255C682.867 25.4255 691.53 25.572 700.068 25.865C708.648 26.158 716.788 27.1415 724.489 28.8156C731.646 30.3642 737.484 32.8962 742.005 36.4119C746.525 39.8856 748.785 44.6778 748.785 50.7883V65.7924C748.785 69.6847 749.036 72.8237 749.538 75.2093C750.082 77.5949 750.814 79.4573 751.735 80.7966C752.656 82.0941 753.744 82.973 755 83.4333C756.255 83.8937 757.595 84.1239 759.018 84.1239C761.654 84.1239 763.956 83.0567 765.923 80.9222C767.89 78.7877 768.958 75.6906 769.125 71.6309H776.219C776.219 77.6577 774.859 82.3033 772.138 85.5678C769.418 88.8323 766.216 91.197 762.533 92.6619C758.097 94.4615 753.263 95.5916 748.031 96.0519C742.842 96.5542 737.275 96.8053 731.332 96.8053C721.831 96.8053 713.859 96.2403 707.413 95.1102C701.01 93.9802 696.469 91.2598 693.79 86.949C692.032 88.1627 689.793 89.3555 687.073 90.5274C684.394 91.6574 681.046 92.7037 677.028 93.6663C672.968 94.5871 668.135 95.3404 662.526 95.9264C656.918 96.5123 650.347 96.8053 642.814 96.8053ZM673.387 85.0656C675.814 85.0656 678.577 84.9191 681.674 84.6262C684.813 84.3332 688.161 83.4543 691.719 81.9894C691.3 80.3572 691.091 78.3064 691.091 75.8371V69.1197C689.291 69.036 687.47 68.9942 685.629 68.9942C683.787 68.9523 682.009 68.9314 680.293 68.9314C677.447 68.9314 674.936 69.036 672.759 69.2453C670.625 69.4546 668.825 69.8522 667.36 70.4381C664.431 71.6937 662.966 73.8909 662.966 77.0299C662.966 78.704 663.719 80.4618 665.226 82.3033C666.774 84.1448 669.495 85.0656 673.387 85.0656Z"/><path d="M428.23 122.984V117.083C431.872 116.957 435.199 116.602 438.212 116.016C443.988 114.886 448.32 112.437 451.208 108.671C452.672 106.703 453.865 104.297 454.786 101.451C455.665 98.5631 456.293 95.1312 456.669 91.1552C457.088 87.1792 457.297 82.5754 457.297 77.3438C457.297 74.6652 457.234 72.175 457.109 69.8731C456.983 67.5293 456.816 65.353 456.607 63.3441C455.602 55.4339 453.572 49.5745 450.517 45.7659C448.968 43.8407 447.127 42.3131 444.992 41.1831C442.816 40.0531 440.326 39.2578 437.522 38.7975C434.759 38.3371 431.662 38.1069 428.23 38.1069V32.2057L512.48 26.5556V34.9679C514.238 33.6287 516.309 32.394 518.695 31.264C521.122 30.0921 523.927 29.0667 527.107 28.1878C530.288 27.3508 533.888 26.6811 537.905 26.1789C541.965 25.6767 546.506 25.4255 551.528 25.4255C560.694 25.4255 568.395 26.3044 574.631 28.0623C580.909 29.8201 585.931 32.2685 589.698 35.4074C593.465 38.5045 596.164 42.1457 597.797 46.3309C599.471 50.4744 600.308 54.9735 600.308 59.8284C600.308 65.9808 599.073 71.3589 596.604 75.9626C594.135 80.5664 590.723 84.4169 586.371 87.514C582.018 90.5692 576.891 92.8711 570.99 94.4197C565.089 96.0101 558.727 96.8053 551.905 96.8053C544.958 96.8053 537.926 96.031 530.811 94.4825C523.696 92.9339 517.586 90.7576 512.48 87.9534V93.478C512.48 98.9188 513.422 103.313 515.305 106.662C517.23 110.052 520.516 112.563 525.161 114.195C529.849 115.827 536.336 116.79 544.623 117.083V122.984L428.23 122.984ZM528.551 86.7606C531.9 86.7606 534.327 84.668 535.834 80.4827C537.299 76.2975 538.031 69.9149 538.031 61.3351C538.031 57.4428 537.864 53.9691 537.529 50.9138C537.236 47.8167 536.692 45.2009 535.896 43.0664C534.264 38.6719 531.565 36.4746 527.798 36.4746C524.575 36.4746 521.604 37.2071 518.883 38.6719C516.205 40.1368 514.07 42.0411 512.48 44.3848V79.1016C515.368 81.7383 518.235 83.6845 521.081 84.94C523.968 86.1538 526.459 86.7606 528.551 86.7606Z"/><path d="M354.585 96.8053C339.518 96.8053 326.314 95.5079 314.972 92.913C303.671 90.3181 294.882 86.384 288.604 81.1106C282.326 75.8371 279.188 69.1825 279.188 61.1468C279.188 55.0782 280.987 49.7838 284.586 45.2637C288.228 40.7437 293.355 37.0188 299.967 34.0891C306.58 31.1175 314.511 28.9203 323.761 27.4973C333.01 26.0743 343.285 25.3628 354.585 25.3628C365.843 25.3628 376.118 26.0743 385.41 27.4973C394.701 28.9203 402.632 31.1175 409.203 34.0891C415.816 37.0188 420.922 40.7437 424.521 45.2637C428.12 49.7838 429.92 55.0782 429.92 61.1468C429.92 67.1736 428.12 72.4261 424.521 76.9044C420.922 81.3408 415.816 85.0447 409.203 88.0163C402.632 90.9459 394.701 93.1432 385.41 94.608C376.118 96.0729 365.843 96.8053 354.585 96.8053ZM354.585 90.2135C356.552 90.2135 358.31 89.4392 359.859 87.8907C361.449 86.3003 362.809 84.1658 363.939 81.4872C366.199 76.0464 367.329 69.2663 367.329 61.1468C367.329 52.9437 366.199 46.1008 363.939 40.6181C362.809 37.9395 361.449 35.805 359.859 34.2146C358.31 32.6242 356.552 31.829 354.585 31.829C352.576 31.829 350.776 32.6242 349.186 34.2146C347.638 35.805 346.319 37.9395 345.231 40.6181C344.101 43.2967 343.243 46.4147 342.657 49.9722C342.071 53.4878 341.778 57.2127 341.778 61.1468C341.778 65.0391 342.071 68.7431 342.657 72.2587C343.243 75.7743 344.101 78.8505 345.231 81.4872C346.319 84.1658 347.638 86.3003 349.186 87.8907C350.776 89.4392 352.576 90.2135 354.585 90.2135Z"/><path d="M124.307 93.9802V88.079C131.798 87.786 137.658 86.5932 141.885 84.5006C146.112 82.3661 149.083 79.3946 150.799 75.586C152.515 71.7355 153.373 67.0899 153.373 61.649C153.373 53.2785 151.113 47.2517 146.593 43.5687C142.115 39.8856 134.686 38.0441 124.307 38.0441V32.1429L208.556 26.4928V35.7841C213.285 32.4777 219.04 29.9247 225.82 28.125C232.6 26.3254 239.276 25.4255 245.847 25.4255C251.037 25.4255 255.515 25.865 259.282 26.7439C263.09 27.6228 266.25 28.8575 268.761 30.4479C273.616 33.6287 276.044 38.0441 276.044 43.6942C276.044 48.0051 273.595 51.7718 268.698 54.9945C266.313 56.543 263.362 57.8195 259.847 58.824C256.373 59.7866 252.397 60.2679 247.919 60.2679C239.883 60.2679 233.396 59.0542 228.457 56.6267C223.56 54.283 221.112 51.1649 221.112 47.2726C221.112 44.2592 222.242 41.7899 224.502 39.8647C226.804 37.9395 229.671 36.4956 233.103 35.533C236.535 34.5703 239.967 34.0681 243.398 34.0263C235.823 34.0263 229.378 34.7168 224.062 36.098C218.789 37.4373 213.62 39.6554 208.556 42.7525V61.084C208.556 67.069 209.54 72.0076 211.507 75.8999C213.474 79.7503 216.78 82.6591 221.426 84.6262C226.071 86.5932 232.391 87.7442 240.385 88.079V93.9802L124.307 93.9802Z"/><path d="M68.743 96.8052C66.2737 96.8052 63.8463 96.7634 61.4607 96.6797C59.0751 96.596 56.7732 96.4704 54.555 96.303C50.0767 95.9682 45.9333 95.3613 42.1247 94.4824C38.3161 93.6454 34.8633 92.4526 31.7662 90.904C28.7109 89.3136 26.0742 87.3047 23.856 84.8772C21.6797 82.4079 20.0056 79.4364 18.8337 75.9626C17.6618 72.4888 17.0759 68.3663 17.0759 63.5951L17.0759 36.9141H0L0 31.0128C7.57533 31.0128 14.8786 30.385 21.9099 29.1295C28.983 27.8739 35.3864 25.9905 41.1203 23.4794C46.9796 20.9263 51.8136 17.7037 55.6222 13.8114C59.4308 9.87723 61.7118 5.27344 62.4651 0L75.7743 0V28.2506L115.137 28.2506V36.9141L75.7743 36.9141V56.5011C75.7743 62.2349 76.0254 67.1108 76.5276 71.1286C77.0299 75.1046 77.9297 78.3273 79.2271 80.7966C81.7383 85.5678 86.5095 87.9534 93.5407 87.9534C97.3912 87.9534 101.032 87.4302 104.464 86.3839C107.896 85.3376 110.7 83.517 112.877 80.9221C115.053 78.3273 116.141 74.728 116.141 70.1242H123.737C123.737 74.5187 122.942 78.3482 121.352 81.6127C119.761 84.8772 116.957 87.6395 112.939 89.8996C110.219 91.4062 106.85 92.6618 102.832 93.6663C98.7723 94.7126 93.9174 95.4869 88.2673 95.9891C82.659 96.5332 76.1509 96.8052 68.743 96.8052Z"/></svg>
+</div>
+  <div class="pop-wrap" id="popwrap"><section class="b-form" id="subpop" aria-label="Подписка">
+    <button type="button" class="pop-head" aria-expanded="true" aria-controls="popbody"><span>Подписка</span><span class="pop-ic" aria-hidden="true"></span></button>
+    <div class="pop-body" id="popbody"><div class="pop-inner"><div class="pop-pad">
+      <p class="lead">Сообщим, как только выйдет первый выпуск</p>
+      <!-- Netlify Forms: адреса видны в панели Netlify → Forms → subscribe (можно выгрузить CSV и импортировать в Kit) -->
+      <form id="signup" name="subscribe" action="/" method="post" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="subscribe">
+      <p hidden><label>Не заполняйте: <input name="bot-field"></label></p>
+      <input type="email" name="email_address" placeholder="ваш email" autocomplete="email" required aria-label="Ваш email">
+      <button type="submit" tabindex="-1" aria-label="Хочу прочитать" title="Хочу прочитать">→</button>
+    </form>
+      <p class="note" id="note" role="status"></p>
+    </div></div></div>
+  </section></div>
+  <script>
+    // подписка: открыта сразу, заголовком можно свернуть и развернуть
+    (function () {
+      const wrap = document.getElementById('popwrap'), pop = document.getElementById('subpop'), head = pop.querySelector('.pop-head');
+      head.addEventListener('click', () => {
+        const c = !pop.classList.contains('closed');
+        pop.classList.toggle('closed', c); head.setAttribute('aria-expanded', String(!c));
+        if (!c) setTimeout(() => pop.querySelector('input[type=email]').focus({ preventScroll: true }), 450);
+      });
+      if (matchMedia('(max-width: 1100px)').matches) { pop.classList.add('closed'); head.setAttribute('aria-expanded', 'false'); }
+      requestAnimationFrame(() => wrap.classList.add('in'));
+    })();
+  </script>
+  <script>
+    const form = document.getElementById('signup');
+    const note = document.getElementById('note');
+    const button = form.querySelector('button[type=submit]');
+    const input = form.querySelector('input[type=email]');
+    input.addEventListener('input', () => {
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim());
+      form.classList.toggle('ready', ok);
+      button.tabIndex = ok ? 0 : -1;
+    });
+
+    function say(text, cls) {
+      note.textContent = text;
+      note.className = 'note' + (cls ? ' ' + cls : '');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = input.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        say('Похоже, в адресе опечатка.', 'err');
+        input.focus();
+        return;
+      }
+      button.disabled = true;
+      say('Отправляем…');
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString(),
+        });
+        if (!res.ok) throw new Error(res.status);
+        form.reset(); form.classList.remove('ready');
+        say('Готово! Напишем, как только выйдет выпуск.', 'ok');
+      } catch {
+        say('Не получилось отправить. Попробуйте ещё раз чуть позже.', 'err');
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+  <script>
+    // журнал стоит анфас, через пару секунд начинает медленно вращаться; можно раскрутить мышкой или пальцем
+    (function () {
+      const stage = document.getElementById('stage');
+      const book = document.getElementById('book');
+      const faces = { front: book.querySelector('.f-front'), back: book.querySelector('.f-back'),
+                      edge: book.querySelector('.f-edge'), spine: book.querySelector('.f-spine') };
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const CRUISE = reduce ? 0 : 30;            // градусов в секунду — полный оборот за 12 с
+      let angle = 0, vel = 0, cruise = 0, drag = null, prev = performance.now();
+
+      // торец: страница за страницей, в основном бумага, местами чёрные и красные развороты
+      (function paintPages() {
+        // как у Outlander: белый блок и редкие чёткие цветные листы толщиной ~1/36 торца
+        const W = '#f7f6f2', K = '#111111', B = '#2f6fd0', R = '#e2483d', N = '#1f3f8f', Y = '#ffcc1f', P = '#ff4fa3', G = '#6e7277';
+        // ~20 листов на ширину торца: каждая цветная линия ≈ 1,5 px, как в рефе
+        const cols = [G, W, K, W, B, W, W, R, W, K, W, N, W, W, Y, W, R, W, P, K];
+        cols[cols.length - 1] = K;                         // задняя обложка чёрная
+        // жёсткие CSS-градиенты, а не картинка: линии остаются чёткими на любом размере
+        function strip(vertical, reverse) {
+          const c = reverse ? cols.slice().reverse() : cols, n = c.length, st = [];
+          c.forEach((col, k) => st.push(`${col} ${(k / n * 100).toFixed(3)}% ${((k + 1) / n * 100).toFixed(3)}%`));
+          return `linear-gradient(${vertical ? '180deg' : '90deg'}, ${st.join(', ')})`;
+        }
+        book.querySelector('.f-edge').style.background = strip(false, false);
+        book.querySelector('.f-top').style.background = strip(true, true);
+        book.querySelector('.f-bottom').style.background = strip(true, false);
+      })();
+
+      // свет спереди-слева: грани темнеют, когда отворачиваются
+      const L = [-.45, 0, .89];
+      const lit = (nx, nz) => (.82 + .18 * Math.max(0, nx * L[0] + nz * L[2])).toFixed(3);
+      function render() {
+        const r = angle * Math.PI / 180, s = Math.sin(r), c = Math.cos(r);
+        book.style.transform = `rotateY(${angle}deg)`;
+        faces.front.style.filter = `brightness(${lit(s, c)})`;
+        faces.back.style.filter = `brightness(${lit(-s, -c)})`;
+        faces.edge.style.filter = `brightness(${lit(c, -s)})`;
+        faces.spine.style.filter = `brightness(${lit(-c, s)})`;
+      }
+
+      function frame(t) {
+        const dt = Math.min(.05, (t - prev) / 1000); prev = t;
+        if (!drag) { vel += (cruise - vel) * Math.min(1, dt * 1.6); angle += vel * dt; }
+        render();
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(() => book.classList.add('in'));
+      setTimeout(() => { cruise = CRUISE; }, 2200);   // сначала секунда-другая на обложке
+      render(); requestAnimationFrame(frame);
+
+      stage.addEventListener('pointerdown', e => {
+        drag = { x: e.clientX, t: performance.now() }; vel = 0;
+        stage.classList.add('drag'); stage.setPointerCapture(e.pointerId);
+      });
+      stage.addEventListener('pointermove', e => {
+        if (!drag) return;
+        const now = performance.now(), dx = e.clientX - drag.x, dt = Math.max(.008, (now - drag.t) / 1000);
+        angle += dx * .5;
+        vel = vel * .6 + (dx * .5 / dt) * .4;
+        drag = { x: e.clientX, t: now };
+      });
+      function release() {
+        if (!drag) return;
+        if (performance.now() - drag.t > 120) vel = 0;   // отпустили без броска
+        vel = Math.max(-900, Math.min(900, vel));
+        drag = null; stage.classList.remove('drag');
+      }
+      stage.addEventListener('pointerup', release);
+      stage.addEventListener('pointercancel', release);
+    })();
+  </script>
+</body>
+</html>
